@@ -1,11 +1,12 @@
 import styles from "./page.module.css";
 import { getSortedPostsData } from "@/app/lib/post";
+import Link from "next/link";
 
 export default function Home() {
   const allPostsData = getSortedPostsData();
 
   return (
-    <main>
+    <>
       <section className={styles.headingMd}>
         <p>[SB Park Introduction]</p>
         <p>(This is a website)</p>
@@ -14,7 +15,7 @@ export default function Home() {
         <h2 className={styles.headingLg}>Blog</h2>
         <ul className={styles.list}>{allPostsData.map(PostCard)}</ul>
       </section>
-    </main>
+    </>
   );
 }
 
@@ -27,7 +28,7 @@ type PostProps = {
 function PostCard({ id, title, date }: PostProps) {
   return (
     <li key={id} className={styles.listItem}>
-      <a>{title}</a>
+      <Link href={`/posts/${id}`}>{title}</Link>
       <br />
       <small className={styles.lightText}>{date}</small>
     </li>
